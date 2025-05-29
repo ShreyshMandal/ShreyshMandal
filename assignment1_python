@@ -1,0 +1,133 @@
+#library Access System
+# Problem Statement: You are tasked with developing 
+# a simplified library access system. A base class 
+# Member holds the basic member information like name
+# and membership ID. A subclass StudentMember allows
+# book checkouts and displays the number of books
+# currently borrowed. Implement necessary methods 
+# to add a book, return a book, and display borrowing 
+# status.
+
+class Member:
+    def __init__(self,name,membership_id):
+        self.name=name
+        self.membership_id=membership_id
+    
+    def details(self):
+        print( f"(Name : {self.name} Membership : {self.membership_id}" )
+
+class StudentMember(Member):
+    def __init__(self, name, membership_id):
+        super().__init__(name, membership_id)
+        self.borrowed_books=[]
+    
+    def add_book(self,book_name):
+        self.borrowed_books.append(book_name)
+        print(f"{self.borrowed_books} has been added ")
+
+    def return_book(self,book_name):
+        if book_name in self.borrowed_books:
+            self.borrowed_books.remove(book_name)
+            print(f"The book has been returned !")
+        else:
+            print("The book is not in borrowing list")
+    
+    def borrowing_details(self):
+         print(f"Borrowed Books ({len(self.borrowed_books)}): {', '.join(self.borrowed_books) if self.borrowed_books else 'None'}")
+
+m1 = StudentMember("shreysh","12345")
+m1.details()
+m1.add_book("Rich Dad poor Dad")
+m1.add_book("Bhagwad Gita")
+m1.borrowing_details()
+m1.return_book("Bhagwad Gita")
+m1.borrowing_details()
+
+
+
+# 2. Drone Fleet Management
+# Problem Statement: Design a system to manage a fleet of drones.
+# A class Device has basic device info. A class Flyer has the
+#  method fly() to simulate drone flying.
+#  A third class Drone inherits from both Device and Flyer,
+#   and includes additional drone-specific actions like 
+#   capture_image(). Create an object of Drone and demonstrate
+#   all functionalities ensuring no conflict arises between 
+#   inherited methods.
+
+class Device:
+    def __init__(self,drone_id,drone_name):
+        self.drone_id=drone_id
+        self.drone_name=drone_name
+    
+    def details(self):
+        print(f"Drone id is {self.drone_id} and name is {self.drone_name}")
+
+class flyer:
+    def fly(self):
+        print("Drone is flying")
+
+class Drone(Device,flyer):
+    def __init__(self, drone_id, drone_name):
+        super().__init__(drone_id, drone_name)
+        
+    def image_captured(self):
+        print("Images have been captured by drone ")
+
+d1 = Drone("r1254","agni")
+d1.details()
+d1.fly()
+d1.image_captured()
+
+
+
+
+# 3. Online Learning Platform
+# Problem Statement: Build a class hierarchy for an online
+#  learning platform. The base class User includes name and email.
+#   The subclass Instructor adds subject expertise and a method to
+#   upload content. A third class CourseCreator (inherits from 
+# Instructor) allows creation of complete courses with modules.
+#   Override the display_info() method at each level to reflect 
+#   role-specific details.
+
+class User:
+    def __init__(self,name,email):
+        self.name=name
+        self.email=email
+
+    def display_info(self):
+        print("Name : ",self.name)
+        print("Email : ",self.email)
+
+class Instructor(User):
+    def __init__(self, name, email,expertise):
+        super().__init__(name, email)
+        self.expertise=expertise
+    
+    def meth_content(self,content):
+        print(f"Instructor : {self.name} upload content {content}")
+
+    def display_info(self):
+        super().display_info()
+        print(f"Expertise  {self.expertise}")
+
+class CourseCreator(Instructor):
+    def __init__(self, name, email, expertise):
+        super().__init__(name, email, expertise)
+        self.courses = {}
+
+    def courses_creator(self,course_name,module):
+        self.courses[course_name]=module
+        print(f"Courses Offered in {course_name} created with {len(module)}")
+
+    def display_info(self):
+        super().display_info()
+        print(f"Courses Created: {', '.join(self.courses.keys()) if self.course else 'None'}")
+   
+    
+c1 = CourseCreator("albert","alber124@gmail.com","information Technology")
+c1.display_info()
+c1.meth_content("informative")
+c1.courses_creator("AI",["intro","neuro Science"])
+c1.display_info()
