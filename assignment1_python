@@ -131,3 +131,60 @@ c1.display_info()
 c1.meth_content("informative")
 c1.courses_creator("AI",["intro","neuro Science"])
 c1.display_info()
+
+# 4. Smart Home Appliance
+# Problem Statement: You are developing a system to control smart
+# appliances. Create a base class Appliance with a method status()
+#  that prints a default message. Subclasses like Fan, Light, and 
+#  AC override this method to give device-specific status updates.
+#  Store all devices in a list and iterate through it, invoking the
+#  status() method to demonstrate polymorphism.
+
+class Appliance:
+    def status(self):
+        print("Appliances are used for dialy usage in day to day life")
+
+class Fan(Appliance):
+    def  status(self):
+        print("Fan is used to get rid of heat weather !")
+
+class Light(Appliance):
+    def status(self):
+        print("Light is used for making brigher at night for visibility !")
+    
+class AC(Appliance):
+    def status(self):
+        print("AC is in 24 degrees temperture for cooling ")
+
+Appliances = [Fan(),Light(),AC()]
+
+for appliance in Appliances:
+    appliance.status()
+
+
+
+
+# 5. Geometry Toolkit
+# Problem Statement: Develop a class ShapeCalculator to calculate
+#  areas. If one argument is passed, treat it as a circle radius
+#  and calculate the area. If two arguments are passed, treat them
+#  as length and width of a rectangle. Implement a single method 
+#  area() with default parameters to simulate overloading. Ensure
+#   it returns appropriate outputs in each case.
+
+import math
+
+class ShapeCalculator:
+    def area(self, len, wid=0):
+        if wid is None:
+            return math.pi * len ** 2
+        else:
+            return len * wid
+
+calculator = ShapeCalculator()
+
+circle = calculator.area(5) 
+rectangle = calculator.area(4, 6) 
+
+print(f"Circle Area: {circle:.2f}")
+print(f"Rectangle Area: {rectangle:.2f}")
